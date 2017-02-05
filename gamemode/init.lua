@@ -14,6 +14,12 @@ function GM:Initialize()
 end
 
 function GM:PlayerInitialSpawn(ply)
+  --Check if they are a returning player
+  if CheckPlayerExists(ply) then
+    print("Player "..ply:Name().." has rejoined the server")
+    return
+  end
+  --Add them to the table
   NewPlayerToDataBase(ply)
   --Make sure they are added to the table, if we can't add them then they should be kicked
   if CheckPlayerExists(ply) then
