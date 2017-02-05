@@ -1,0 +1,13 @@
+"abgg"
+{
+	"base"		"base"
+	"title"		"A Better GunGame"
+	"maps"		"^gg_"
+	"menusystem"	"1"
+
+	"settings"
+	{
+
+
+	}
+}

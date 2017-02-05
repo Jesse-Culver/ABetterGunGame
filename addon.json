@@ -1,0 +1,14 @@
+{
+	"title"		:	"A Better GunGame",
+	"type"		:	"gamemode",
+	"tags"		:	[ "fun", "comic" ],
+	"ignore"	:
+	[
+		"*.psd",
+		"*.md",
+		"*.gma",
+		"*.git*",
+		"*.vcproj",
+		"*.svn*"
+	]
+}
