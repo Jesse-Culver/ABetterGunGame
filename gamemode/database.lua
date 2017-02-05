@@ -3,6 +3,7 @@
 --Plus if you are a server operator or modder you can make better use of it
 
 function CreateTable()
+  sql.Query("DROP TABLE player_data")
   sql.Query("CREATE TABLE player_data (SteamID string, Level init)")
 end
 
@@ -17,13 +18,13 @@ end
 
 function GetLevelFromDatabase(ply)
   --Query returns a table where as QueryValue will convert to a number for us
-  local templevel = sql.QueryValue("SELECT Level FROM player_data WHERE SteamID = '".. ply:SteamID() .. "'")
+  local templevel = sql.QueryValue(" SELECT Level FROM player_data WHERE SteamID = '".. ply:SteamID() .. "'")
   return templevel
 end
 
 function CheckPlayerExists(ply)
-  local test = sql.Query("SELECT count(1) FROM player_data WHERE SteamID = ".. ply:SteamID() .. "'")
-  if test == 0 then
+  local templevel = sql.QueryValue(" SELECT Level FROM player_data WHERE SteamID = '".. ply:SteamID() .. "'")
+  if templevel == false or templevel == nil or templevel == 0 then
     return false
   else
     return true

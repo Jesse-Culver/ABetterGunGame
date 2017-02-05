@@ -7,9 +7,6 @@ DEFINE_BASECLASS( "gamemode_base" )
 
 function GM:Initialize()
   --Make sure we are starting with a clean table
-  if sql.TableExists("player_data") then
-    sql.Query("DROP TABLE player_data")
-  end
   CreateTable()
 end
 
