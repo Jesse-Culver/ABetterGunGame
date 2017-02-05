@@ -7,7 +7,7 @@ DEFINE_BASECLASS( "gamemode_base" )
 
 function GM:Initialize()
   --Make sure we are starting with a clean table
-  if(sql.TableExists("player_data")) then
+  if sql.TableExists("player_data") then
     sql.Query("DROP TABLE player_data")
   end
   CreateTable()
@@ -15,7 +15,13 @@ end
 
 function GM:PlayerInitialSpawn(ply)
   NewPlayerToDataBase(ply)
-  print("Player "..ply:Name().." added to table")
+  --Make sure they are added to the table, if we can't add them then they should be kicked
+  if CheckPlayerExists(ply) then
+    print("Player "..ply:Name().." added to table")
+  else
+    print("ERROR: Player "..ply:Name().." not added to table! Kicking them")
+    ply:Kick("Could not add you to the SQL Table, please try rejoining")
+  end
 end
 
 function GM:PlayerSpawn(ply)
