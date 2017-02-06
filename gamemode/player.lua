@@ -1,5 +1,6 @@
 --This file contains functions related to the player
 DEFINE_BASECLASS( "gamemode_base" )
+
 function GM:PlayerInitialSpawn(ply)
   --Check if they are a returning player
   if ply:IsPlayer() != true then return end
@@ -23,6 +24,7 @@ function GM:PlayerSpawn(ply)
   BaseClass.PlayerSpawn( self, ply )
   local plylevel = GetLevelFromDatabase(ply)
   ply:PrintMessage(HUD_PRINTTALK,"You are level "..plylevel)
+  ABGGUpdateEquipment(ply,plylevel)
 end
 
 function ABGGPlayerDeath(victim, inflictor, attacker)
@@ -32,8 +34,13 @@ function ABGGPlayerDeath(victim, inflictor, attacker)
     templevel = templevel + 1
     UpdateLevelToDatabase(attacker, templevel)
     for k, ply in pairs(player.GetAll()) do
-      ply:ChatPrint(attacker:Nick().." is on level "..templevel)
+      if templevel == GetMaxLevel() then
+        ply:ChatPrint(attacker:Nick().." is on crowbar level!!!")
+      else
+        ply:ChatPrint(attacker:Nick().." is on level "..templevel)
+      end
     end
+
   else
     --They either suicided or died from a non player so remove a level
     local templevel = GetLevelFromDatabase(victim)
@@ -49,6 +56,14 @@ function ABGGPlayerDeath(victim, inflictor, attacker)
 end
 
 hook.Add("PlayerDeath","abggPlayerDeath", ABGGPlayerDeath)
+
+function ABGGUpdateEquipment(ply,lvl)
+  if ply:IsPlayer() != true then return end
+  ply:RemoveAllItems()
+  ply:Give( "weapon_abgg_hl2crowbar")
+  if lvl == GetMaxLevel() then return end
+
+end
 
 --Override because we want realistic fall damage at all times
 function GM:GetFallDamage(ply, speed)
