@@ -18,6 +18,7 @@ SWEP.SlotPos = 0 --This is the row within the colum
 SWEP.Primary.Ammo = "Pistol"
 SWEP.Primary.ClipSize = 18 --Max ammo per clip/magazine
 SWEP.Primary.DefaultClip = 18 --Starting ammo in the Clip/magazine
+SWEP.Primary.ExtraAmmo = 90
 SWEP.Primary.Automatic = false --does holding down fire make it continous
 
 SWEP.Primary.Sound          = Sound( "weapons/pistol/pistol_fire2.wav" )
@@ -25,7 +26,7 @@ SWEP.Primary.Recoil         = 1.5
 SWEP.Primary.Damage         = 12
 SWEP.Primary.Force          = 1 --Physics force
 SWEP.Primary.NumShots       = 1
-SWEP.Primary.Cone           = 0.02
+SWEP.Primary.Cone           = 0.04
 SWEP.Primary.Delay          = 0.15
 
 --Secondary fire defaults
