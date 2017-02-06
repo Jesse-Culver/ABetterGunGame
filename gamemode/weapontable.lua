@@ -34,7 +34,7 @@ function FillWeaponTable()
 end
 
 function GetMaxLevel()
-  return #weapon_table
+  return #weapon_table + 1
 end
 
 function RandomizeWeaponOrder()
