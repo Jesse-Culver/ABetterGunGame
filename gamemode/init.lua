@@ -33,3 +33,28 @@ function GM:PlayerSpawn(ply)
   local plylevel = GetLevelFromDatabase(ply)
   ply:PrintMessage(HUD_PRINTTALK,"You are level "..plylevel)
 end
+
+function ABGGPlayerDeath(victim, inflictor, attacker)
+  --This handles leveling
+  if victim:IsPlayer() and attacker:IsPlayer() and attacker != victim then
+    local templevel = GetLevelFromDatabase(attacker)
+    templevel = templevel + 1
+    UpdateLevelToDatabase(attacker, templevel)
+    for k, ply in pairs(player.GetAll()) do
+      ply:ChatPrint(attacker:Nick().." is on level "..templevel)
+    end
+  else
+    --They either suicided or died from a non player so remove a level
+    local templevel = GetLevelFromDatabase(attacker)
+    templevel = templevel - 1
+    if templevel <= 0 then
+      templevel = 1
+    end
+    UpdateLevelToDatabase(attacker, templevel)
+    for k, ply in pairs(player.GetAll()) do
+      ply:ChatPrint(attacker:Nick().." went down a level and is now level "..templevel)
+    end
+  end
+end
+
+hook.Add("PlayerDeath","abggPlayerDeath", ABGGPlayerDeath)
