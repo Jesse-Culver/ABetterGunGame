@@ -12,7 +12,7 @@ end
 
 function GM:PlayerInitialSpawn(ply)
   --Check if they are a returning player
-  if ply:IsPlayer() != ture then return end
+  if ply:IsPlayer() != true then return end
   if CheckPlayerExists(ply) then
     print("Player "..ply:Name().." has rejoined the server")
     return
