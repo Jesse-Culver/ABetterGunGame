@@ -46,12 +46,12 @@ function ABGGPlayerDeath(victim, inflictor, attacker)
     end
   else
     --They either suicided or died from a non player so remove a level
-    local templevel = GetLevelFromDatabase(attacker)
+    local templevel = GetLevelFromDatabase(victim)
     templevel = templevel - 1
     if templevel <= 0 then
       templevel = 1
     end
-    UpdateLevelToDatabase(attacker, templevel)
+    UpdateLevelToDatabase(victim, templevel)
     for k, ply in pairs(player.GetAll()) do
       ply:ChatPrint(attacker:Nick().." went down a level and is now level "..templevel)
     end
