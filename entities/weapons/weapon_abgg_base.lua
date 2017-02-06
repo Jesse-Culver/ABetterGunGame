@@ -34,6 +34,7 @@ SWEP.SlotPos = 0 --This is the row within the colum
 SWEP.Primary.Ammo = "Pistol"
 SWEP.Primary.ClipSize = 10 --Max ammo per clip/magazine
 SWEP.Primary.DefaultClip = 10 --Starting ammo in the Clip/magazine
+SWEP.Primary.ExtraAmmo = 10
 SWEP.Primary.Automatic = true --does holding down fire make it continous
 
 SWEP.Primary.Sound          = Sound( "Weapon_Pistol.Empty" )
@@ -50,6 +51,7 @@ SWEP.Primary.Distance       = 56756
 SWEP.Secondary.Ammo = "Pistol"
 SWEP.Secondary.ClipSize = 10 --Max ammo per clip/magazine
 SWEP.Secondary.DefaultClip = 10 --Starting ammo in the Clip/magazine
+SWEP.Secondary.ExtraAmmo = 10
 SWEP.Secondary.Automatic = true --does holding down fire make it continous
 
 SWEP.Secondary.Sound          = Sound( "Weapon_Pistol.Empty" )
@@ -148,4 +150,9 @@ function SWEP:ShootBullet( damage, num_bullets, aimcone, force, distance, ammo )
 
 	self.Owner:FireBullets( bullet )
 
+end
+
+function SWEP:Equip(NewOwner)
+  NewOwner:SetAmmo(self.Primary.ExtraAmmo, self.Primary.Ammo)
+  NewOwner:SetAmmo(self.Secondary.ExtraAmmo, self.Secondary.Ammo)
 end
