@@ -1,5 +1,5 @@
 --This file contains functions related to the player
-
+DEFINE_BASECLASS( "gamemode_base" )
 function GM:PlayerInitialSpawn(ply)
   --Check if they are a returning player
   if ply:IsPlayer() != true then return end
