@@ -22,6 +22,7 @@ SWEP.AutoSwitchFrom = true
 SWEP.Weight = 5
 
 SWEP.DrawWeaponInfoBox = false
+SWEP.BounceWeaponIcon = false
 
 SWEP.DrawCrosshair = true
 SWEP.Ironsights = false
@@ -39,9 +40,11 @@ SWEP.Primary.Sound          = Sound( "Weapon_Pistol.Empty" )
 SWEP.Primary.Recoil         = 1.5
 SWEP.Primary.Damage         = 1
 SWEP.Primary.Force          = 1 --Physics force
-SWEP.Primary.NumShots       = 1
+SWEP.Primary.NumShots       = 1 --as in shots that come out at the same time like a shotgun
 SWEP.Primary.Cone           = 0.02
 SWEP.Primary.Delay          = 0.15
+SWEP.Primary.Distance       = 56756
+
 
 --Secondary fire defaults
 SWEP.Secondary.Ammo = "Pistol"
@@ -56,6 +59,7 @@ SWEP.Secondary.Force          = 1
 SWEP.Secondary.NumShots       = 1
 SWEP.Secondary.Cone           = 0.02
 SWEP.Secondary.Delay          = 0.15
+SWEP.Secondary.Distance       = 56756
 
 SWEP.ReloadSound = Sound("weapons/pistol/pistol_reload1.wav")
 
@@ -74,7 +78,7 @@ function SWEP:PrimaryAttack()
 	self.Weapon:EmitSound(self.Primary.Sound)
 
 	-- Shoot bullets, (damage,number,aimcone)
-	self:ShootBullet( self.Primary.Damage, self.Primary.NumShots, self.Primary.Cone, self.Primary.Force )
+	self:ShootBullet( self.Primary.Damage, self.Primary.NumShots, self.Primary.Cone, self.Primary.Force, self.Primary.Distance, self.Primary.Ammo )
 
 	-- Remove bullets from our clip/magazine
 	self:TakePrimaryAmmo( self.Primary.NumShots )
@@ -100,7 +104,7 @@ function SWEP:SecondaryAttack()
 	self.Weapon:EmitSound(self.Secondary.Sound)
 
 	-- Shoot bullets, (damage,number,aimcone)
-	self:ShootBullet( self.Secondary.Damage, self.Secondary.NumShots, self.Secondary.Cone, self.Secondary.Force )
+	self:ShootBullet( self.Secondary.Damage, self.Secondary.NumShots, self.Secondary.Cone, self.Secondary.Force, self.Primary.Distance, self.Secondary.Ammo )
 
 	-- Remove bullets from our clip/magazine
 	self:TakeSecondaryAmmo( self.Secondary.NumShots )
@@ -125,7 +129,7 @@ end
    Name: SWEP:ShootBullet( )
    Desc: A convenience function to shoot bullets
 -----------------------------------------------------------]]
-function SWEP:ShootBullet( damage, num_bullets, aimcone, force )
+function SWEP:ShootBullet( damage, num_bullets, aimcone, force, distance, ammo )
 
   self:SendWeaponAnim(self.PrimaryAnim)
   self.Owner:MuzzleFlash()
@@ -139,8 +143,8 @@ function SWEP:ShootBullet( damage, num_bullets, aimcone, force )
 	bullet.Tracer	= 1								-- Show a tracer on every x bullets
 	bullet.Force	= force									-- Amount of force to give to phys objects
 	bullet.Damage	= damage
-  bullet.Distance = 56756
-  bullet.AmmoType = "Pistol"
+  bullet.Distance = distance
+  bullet.AmmoType = ammo
 
 	self.Owner:FireBullets( bullet )
 

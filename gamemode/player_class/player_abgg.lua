@@ -9,7 +9,8 @@ PLAYER.RunSpeed = 300
 function PLAYER:Loadout()
   self.Player:RemoveAllAmmo()
   self.Player:RemoveAllItems()
-  self.Player:Give( "weapon_crowbar")
+  self.Player:Give( "weapon_abgg_hl2crowbar")
+  self.Player:Give("weapon_abgg_hl2pistol")
 end
 
 player_manager.RegisterClass("player_abgg", PLAYER, "player_default")
