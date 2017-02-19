@@ -11,6 +11,8 @@ SWEP.ViewModel = "models/weapons/c_crowbar.mdl"
 SWEP.WorldModel = "models/weapons/w_crowbar.mdl"
 SWEP.UseHands = true
 
+SWEP.AutoSwitchTo = true
+SWEP.Weight = 1
 SWEP.Slot = 0 --This is the colum it will be in 0 = crowbar/stunstick/gravitygun
 SWEP.SlotPos = 0 --This is the row within the colum
 
@@ -34,7 +36,7 @@ SWEP.Secondary.Automatic = false --does holding down fire make it continous
 
 function SWEP:PrimaryAttack()
    self.Weapon:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
-   
+
    if ( !self:CanPrimaryAttack() ) then return end
 
    local spos = self.Owner:GetShootPos()
