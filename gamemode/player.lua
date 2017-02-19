@@ -33,6 +33,7 @@ function ABGGPlayerDeath(victim, inflictor, attacker)
     local templevel = GetLevelFromDatabase(attacker)
     templevel = templevel + 1
     UpdateLevelToDatabase(attacker, templevel)
+    ABGGUpdateEquipment(attacker,templevel)
     for k, ply in pairs(player.GetAll()) do
       if templevel == GetMaxLevel() then
         ply:ChatPrint(attacker:Nick().." is on crowbar level!!!")
@@ -62,7 +63,8 @@ function ABGGUpdateEquipment(ply,lvl)
   ply:RemoveAllItems()
   ply:Give( "weapon_abgg_hl2crowbar")
   if lvl == GetMaxLevel() then return end
-
+  local tempstring = tostring(GetWeaponForLevel(lvl))
+  ply:Give(tempstring)
 end
 
 --Override because we want realistic fall damage at all times

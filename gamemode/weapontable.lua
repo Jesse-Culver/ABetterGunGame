@@ -38,6 +38,7 @@ function GetMaxLevel()
 end
 
 function RandomizeWeaponOrder()
+  print("Original Weapon Order")
   PrintTable(weapon_table)
   local upperBound = #weapon_table
   local tempTable = {
@@ -48,5 +49,13 @@ function RandomizeWeaponOrder()
     table.remove(weapon_table,tempRand)
   end
   table.CopyFromTo(tempTable,weapon_table)
+  print("New Weapon Order")
   PrintTable(weapon_table)
+      print("Weapon 1 is "..weapon_table[1])
+end
+
+function GetWeaponForLevel(lvl)
+  //print("Player is lvl "..lvl)
+  print("Player is getting a "..weapon_table[lvl])
+  return weapon_table[lvl]
 end
