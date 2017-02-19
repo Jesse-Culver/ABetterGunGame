@@ -50,7 +50,7 @@ function ABGGPlayerDeath(victim, inflictor, attacker)
     end
     UpdateLevelToDatabase(victim, templevel)
     for k, ply in pairs(player.GetAll()) do
-      ply:ChatPrint(attacker:Nick().." went down a level and is now level "..templevel)
+      ply:ChatPrint(victim:Nick().." went down a level and is now level "..templevel)
     end
   end
 end
