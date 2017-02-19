@@ -4,7 +4,7 @@
 
 function CreateTable()
   sql.Query("DROP TABLE player_data")
-  sql.Query("CREATE TABLE player_data (SteamID string, Level init)")
+  sql.Query("CREATE TABLE player_data (SteamID string, Level int)")
 end
 
 function NewPlayerToDataBase(ply)
@@ -17,9 +17,10 @@ function UpdateLevelToDatabase( ply, lvl )
 end
 
 function GetLevelFromDatabase(ply)
-  --Query returns a table where as QueryValue will convert to a number for us
+  --Query returns a table where as QueryValue will convert to a string for us
+  --So we then also need to change it to a int using tonumber
   local templevel = sql.QueryValue(" SELECT Level FROM player_data WHERE SteamID = '".. ply:SteamID() .. "'")
-  return templevel
+  return tonumber(templevel)
 end
 
 function CheckPlayerExists(ply)
